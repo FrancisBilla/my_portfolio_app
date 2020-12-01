@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Resume
+from .models import Resume, Post
 
 
 
@@ -12,7 +12,13 @@ def home(request):
 
 def about(request):
     resume = Resume.objects.get(pk=1)
-    return render(request, 'resume/about.html', {'resume': resume})
+    context = {
+        'resume' : resume
+    }
+    return render(request, 'resume/about.html', context)
 
 def blog(request):
-    return render(request, 'resume/blog.html')
+    context = {
+        'posts' :Post.objects.all()
+    }
+    return render(request, 'resume/blog.html', context)
