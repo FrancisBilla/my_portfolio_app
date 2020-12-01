@@ -1,14 +1,18 @@
 from django.shortcuts import render
-# from django.http import HttpResponse
+from .models import Resume
+
 
 
 # Create your views here.
 
 
 def home(request):
-#     return HttpResponse('<h1>home page</h1>')
+
     return render(request, 'resume/home.html')
 
 def about(request):
-#     return HttpResponse('<h1>home page</h1>')
-    return render(request, 'resume/about.html')
+    resume = Resume.objects.get(pk=1)
+    return render(request, 'resume/about.html', {'resume': resume})
+
+def blog(request):
+    return render(request, 'resume/blog.html')
